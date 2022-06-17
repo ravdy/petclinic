@@ -40,22 +40,4 @@ node {
         sleep 5
         sh "curl ec2-52-70-39-48.compute-1.amazonaws.com:8080/petclinic"
     }
-    pipeline {
-        agent any
-        tools {
-            maven 'maven3'
-        }
-        stages{
-            stages('Build'){
-                steps{
-                    sh script: 'mvn clean package'
-                }
-            }
-            stage('Upload War To Nexus'){
-                steps{
-                    sh script: 'mvn clean package'
-                }
-            }
-        }
-    }  
 }
