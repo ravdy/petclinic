@@ -1,6 +1,18 @@
 node {
     def mvnHome = tool name: 'Maven 3.8.6', type: 'maven'
     def mvnCli = "${mvnHome}/bin/mvn"
+    
+    def user
+node {
+wrap([$class: 'BuildUser']) {
+user = env.BUILD_USER_ID
+}
+
+emailext mimeType: 'text/html',
+             subject: "[Jenkins]${currentBuild.fullDisplayName}",
+             to: "user@xxx.com",
+             body: '''<a href="${BUILD_URL}input">click to approve</a>'''
+}
 
     properties([
         buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')),
