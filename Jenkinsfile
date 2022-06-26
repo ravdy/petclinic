@@ -11,7 +11,7 @@ node {
         parameters([string(defaultValue: 'DEV', description: 'env name', name: 'environment', trim: false)])
     ])
     stage('Checkout SCM'){
-        git branch: 'master', credentialsId: 'github-creds', url: 'https://github.com/gouthamchilakala/PetClinic'
+        git branch: 'master', credentialsId: 'github-creds', url: 'https://github.com/GokulVaradharajan/petclinic.git'
     }
     stage('Read praram'){
         echo "The environment chosen during the Job execution is ${params.environment}"
@@ -33,7 +33,7 @@ node {
     }
     stage('Deploy To Tomcat'){
         sshagent(['app-server']) {
-            sh 'scp -o StrictHostKeyChecking=no target/*.war ec2-user@ec2-52-70-39-48.compute-1.amazonaws.com:/opt/apache-tomcat-8.5.38/webapps/'
+            sh 'scp -o StrictHostKeyChecking=no target/*.war 127.0.0.1:8084:/opt/apache-tomcat-8.5.38/webapps/'
         }
     }
     stage('Smoke Test'){
