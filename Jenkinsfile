@@ -1,5 +1,5 @@
 node {
-    def mvnHome = tool name: 'Maven_3', type: 'maven'
+    def mvnHome = tool name: 'Maven 3.8.6', type: 'maven'
     def mvnCli = "${mvnHome}/bin/mvn"
 	
     
@@ -19,7 +19,7 @@ node {
         echo "$JENKINS_URL"
     }
     stage('maven compile'){
-        // def mvnHome = tool name: 'Maven_3', type: 'maven'
+        // def mvnHome = tool name: 'Maven 3.8.6', type: 'maven'
         // def mvnCli = "${mvnHome}/bin/mvn"
         sh "${mvnCli} clean compile"
     }
